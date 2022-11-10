@@ -17,3 +17,10 @@ export default {
   },
 };
 </script>
+
+<style>
+#app {
+  max-width: 65rem;
+  margin: 0 auto;
+}
+</style>
