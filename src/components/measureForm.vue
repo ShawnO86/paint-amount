@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
       <div v-if="roomShape == 'rectangle'">
         <RectangleForm @addRoom="addRoom" />
       </div>
@@ -11,7 +11,7 @@
       </div>
 
     <div class="roomList" v-if="rooms[0]">
-      <div v-for="room in rooms" :key="room.id">
+      <div v-for="room in rooms" :key="room.id" class="roomCard">
           <button class="delBtn" @click=deleteRoom(room.id)>
           &#10006;
         </button>
@@ -63,3 +63,34 @@
   }
   }
   </script>
+
+  <style>
+    .formHolder {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .formHolder label{
+      display: block;
+      text-align: center;
+    }
+    .formHolder input{
+      padding: 0.5rem;
+    }
+    .submitBtn {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin: 2rem auto;
+    }
+    .roomList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .roomCard {
+      padding: 0.5rem;
+      background-color: #faebd7;
+      margin: 0 0.25rem 0.5rem 0.25rem;
+    }
+  </style>

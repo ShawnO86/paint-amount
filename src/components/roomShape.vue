@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainContainer">
       <h2>First, select a room shape:</h2>
       <form @submit.prevent>
         <div id="shapeContainer">
@@ -53,4 +53,21 @@
   
   };
   </script>
+  <style scoped>
+#shapeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#shapeContainer div {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+#shapeContainer label, #shapeContainer input{
+  cursor: pointer;
+}
+.mainContainer {
+  margin: 2rem 1rem;
+}
+</style>
   

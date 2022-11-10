@@ -1,4 +1,5 @@
 <template>
+  <div >
     <form @submit="submitRoom">
       <h2>Next, enter measurements:</h2>
       <div class="formHolder">
@@ -32,7 +33,7 @@
         </div>
         <h2>Then, subtract windows and doors from area (optional):</h2>
         <div class="formHolder">     
-          <div class="inputContainer"> 
+          <div class="inputContainer windowDoor"> 
             <label for="windows">Windows (15sq. ft.)</label>
             <input
               type="number"
@@ -42,13 +43,15 @@
             />
   
           </div>      
-          <div class="inputContainer">
+          <div class="inputContainer windowDoor">
             <label for="doors">Doors (20sq. ft.)</label>
             <input type="number" placeholder="Doors" id="doors" v-model="doors" />
   
           </div>
-      </div>
-      <input type="submit" value="Save Room" class="submitBtn" />
+      </div>        
+      <input type="submit" value="Save Room" class="submitBtn" />  
+    </form>
+
       <div class="outputContainer">
         <p v-if="area">Total paintable area (walls): {{ area }} square feet.</p>
         <p v-if="oneCoat">
@@ -65,7 +68,7 @@
           Ceiling paint (two coats): {{ twoCoatCeiling }} gallons.
         </p>
       </div>
-    </form>
+</div>
   </template>
   
   <script>
@@ -136,3 +139,9 @@
     },
   };
   </script>
+
+  <style scoped>
+  form {
+    width: 100%;
+  }
+  </style>

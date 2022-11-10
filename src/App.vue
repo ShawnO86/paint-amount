@@ -20,7 +20,11 @@ export default {
 
 <style>
 #app {
-  max-width: 65rem;
+  max-width: 50rem;
   margin: 0 auto;
 }
+legend {
+  text-align: center;
+}
+
 </style>
