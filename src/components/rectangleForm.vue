@@ -34,7 +34,7 @@
         <h2>Then, subtract windows and doors from area (optional):</h2>
         <div class="formHolder">     
           <div class="inputContainer windowDoor"> 
-            <label for="windows">Windows (15sq. ft.)</label>
+            <label for="windows">Windows (-15sq. ft.)</label>
             <input
               type="number"
               placeholder="Windows"
@@ -44,30 +44,13 @@
   
           </div>      
           <div class="inputContainer windowDoor">
-            <label for="doors">Doors (20sq. ft.)</label>
+            <label for="doors">Doors (-20sq. ft.)</label>
             <input type="number" placeholder="Doors" id="doors" v-model="doors" />
   
           </div>
       </div>        
       <input type="submit" value="Save Room" class="submitBtn" />  
     </form>
-
-      <div class="outputContainer">
-        <p v-if="area">Total paintable area (walls): {{ area }} square feet.</p>
-        <p v-if="oneCoat">
-          Total paint needed (one coat): {{ oneCoat }} gallons.
-        </p>
-        <p v-if="twoCoats">
-          Total paint needed (two coats): {{ twoCoats }} gallons.
-        </p>
-        <p v-if="oneCoat">Ceiling area: {{ ceilingArea }} square feet.</p>
-        <p v-if="oneCoat">
-          Ceiling paint (one coat): {{ oneCoatCeiling }} gallons.
-        </p>
-        <p v-if="oneCoat">
-          Ceiling paint (two coats): {{ twoCoatCeiling }} gallons.
-        </p>
-      </div>
 </div>
   </template>
   
@@ -80,8 +63,8 @@
         length: "",
         width: "",
         height: "",
-        windows: 0,
-        doors: 0,
+        windows: "",
+        doors: "",
       };
     },
     computed: {
@@ -125,6 +108,8 @@
             ceiling_area: this.ceilingArea,
             one_ceiling: this.oneCoatCeiling,
             two_ceiling: this.twoCoatCeiling,
+            windows: this.windows,
+            doors: this.doors,
             shape: "Rectangle",
           };
           this.$emit("addRoom", newRoom);
