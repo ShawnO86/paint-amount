@@ -13,7 +13,7 @@
           />
         </div>
         <div class="inputContainer">
-          <label for="squareHeight">Height</label>
+          <label for="squareHeight">Wall Height</label>
           <input
             type="number"
             placeholder="height"
@@ -45,7 +45,7 @@
   
   <script>
 export default {
-  name: "rectangle-form",
+  name: "square-form",
   props: {},
   data() {
     return {

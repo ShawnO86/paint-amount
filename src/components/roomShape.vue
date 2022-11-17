@@ -23,16 +23,7 @@
             v-model="roomShape"
           />
         </div>
-        <div class="roomShapeContainer">
-          <input
-            label="Custom"
-            type="radio"
-            id="custom"
-            value="custom"
-            name="roomShape"
-            v-model="roomShape"
-          />
-        </div>
+       
       </div>
     </form>
 

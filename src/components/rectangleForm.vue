@@ -22,7 +22,7 @@
           />
         </div>
         <div class="inputContainer">
-          <label for="rectHeight">Height</label>
+          <label for="rectHeight">Wall Height</label>
           <input
             type="number"
             placeholder="height"
@@ -68,7 +68,7 @@ export default {
   computed: {
     area() {
       return (
-        (this.length * 2 + this.width * 2) * this.height -
+        (this.length  * this.width) * this.height -
         (this.windowArea + this.doorArea)
       );
     },
@@ -79,7 +79,7 @@ export default {
       return Math.round((this.area / 200) * 100) / 100;
     },
     ceilingArea() {
-      return this.width * this.length;
+      return this.length * this.width ;
     },
     oneCoatCeiling() {
       return Math.round((this.ceilingArea / 350) * 100) / 100;

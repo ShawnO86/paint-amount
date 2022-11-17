@@ -6,9 +6,6 @@
     <div v-if="roomShape == 'square'">
       <SquareForm @addRoom="addRoom" />
     </div>
-    <div v-if="roomShape == 'custom'">
-      <CustomForm @addRoom="addRoom" />
-    </div>
     <h3>Saved Rooms:</h3>
     <div class="roomList">
       <div v-for="room in rooms" :key="room.id" class="roomCard">
@@ -20,10 +17,10 @@
         <div class="roomData">
           <p v-if="room.windows">Windows: {{ room.windows }}</p>
           <p v-if="room.doors">Doors: {{ room.doors }}</p>
-          <p>Area: {{ room.area }}sq. feet</p>
+          <p>Paintable Area: {{ room.area }}sq. feet</p>
           <p>One coat (walls): {{ room.one_coat }} gallon(s).</p>
           <p>Two coats (walls): {{ room.two_coats }} gallon(s).</p>
-          <p>Ceiling area: {{ room.ceiling_area }}</p>
+          <p>Ceiling area: {{ room.ceiling_area }}sq. feet</p>
           <p>One coat (ceiling): {{ room.one_ceiling }} gallon(s).</p>
           <p>Two coats (ceiling): {{ room.two_ceiling }} gallon(s).</p>
         </div>
@@ -35,7 +32,6 @@
   <script>
 import RectangleForm from "@/components/rectangleForm.vue";
 import SquareForm from "@/components/squareForm.vue";
-import CustomForm from "@/components/customForm.vue";
 
 export default {
   name: "measurement-form",
@@ -44,8 +40,7 @@ export default {
   },
   components: {
     RectangleForm,
-    SquareForm,
-    CustomForm,
+    SquareForm
   },
   data() {
     return {
