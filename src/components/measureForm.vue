@@ -13,18 +13,20 @@
     <div class="roomList">
       <div v-for="room in rooms" :key="room.id" class="roomCard">
         <button class="delBtn" @click="deleteRoom(room.id)">&#10006;</button>
-        <p>
+        <p class="roomId">
           Room id #: {{ room.id }}<br />
           ({{ room.shape }})
         </p>
-        <p>Windows: {{ room.windows }}</p>
-        <p>Doors: {{ room.doors }}</p>
-        <p>Area: {{ room.area }}sq. feet</p>
-        <p>One coat (walls): {{ room.one_coat }} gallon(s).</p>
-        <p>Two coats (walls): {{ room.two_coats }} gallon(s).</p>
-        <p>Ceiling area: {{ room.ceiling_area }}</p>
-        <p>One coat (ceiling): {{ room.one_ceiling }} gallon(s).</p>
-        <p>Two coats (ceiling): {{ room.two_ceiling }} gallon(s).</p>
+        <div class="roomData">
+          <p v-if="room.windows">Windows: {{ room.windows }}</p>
+          <p v-if="room.doors">Doors: {{ room.doors }}</p>
+          <p>Area: {{ room.area }}sq. feet</p>
+          <p>One coat (walls): {{ room.one_coat }} gallon(s).</p>
+          <p>Two coats (walls): {{ room.two_coats }} gallon(s).</p>
+          <p>Ceiling area: {{ room.ceiling_area }}</p>
+          <p>One coat (ceiling): {{ room.one_ceiling }} gallon(s).</p>
+          <p>Two coats (ceiling): {{ room.two_ceiling }} gallon(s).</p>
+        </div>
       </div>
     </div>
   </div>
@@ -85,40 +87,81 @@ export default {
   <style>
 .formHolder {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .formHolder label {
   display: block;
-  text-align: center;
+  font-weight: 700;
 }
 .formHolder input {
   padding: 0.5rem;
+  text-align: center;
 }
 .submitBtn {
+  padding: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 1.5rem auto 0 auto;
   width: 100%;
-  padding: 0.5rem;
-  margin: 2rem auto;
+  background-color: rgb(29, 94, 94);
+  color: #fff;
+  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  border: none;
+  border-radius: 0.5rem;
+}
+.submitBtn:active,
+.submitBtn:hover {
+  background-color: rgba(29, 94, 94, 0.25);
+  color: #000;
+  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
 }
 .roomList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-auto-columns: 15rem;
+  gap: 2rem;
+  margin: 3rem 2rem;
 }
 .roomCard {
-  padding: 0.5rem;
-  background-color: #faebd7;
-  margin: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  border-radius: 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem 0 1rem;
+  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  max-width: 20rem;
+  justify-self: center;
+}
+.roomId {
+  position: relative;
+  bottom: 2rem;
+  font-weight: 700;
+  border-bottom: 1px solid rgb(171, 75, 19);
+  padding-bottom: 1rem;
+}
+.roomData {
+  position: relative;
+  bottom: 1.5rem;
 }
 .delBtn {
   position: relative;
-  background: none;
   color: red;
   border: none;
+  border-radius: 1rem;
   left: 90%;
   cursor: pointer;
+  font-weight: 900;
+  transition: transform 150ms;
+  z-index: 2;
 }
 .delBtn:hover {
-  transform: scale(130%);
+  transform: scale(135%);
+}
+@media only screen and (max-width: 450px) {
+  .roomList {
+    margin: 1rem 0.25rem;
+  }
 }
 </style>
