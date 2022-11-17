@@ -68,7 +68,7 @@ export default {
   computed: {
     area() {
       return (
-        (this.length  * this.width) * this.height -
+        (((this.length + this.width) * 2) * this.height) -
         (this.windowArea + this.doorArea)
       );
     },

@@ -58,7 +58,7 @@ export default {
   computed: {
     area() {
       return (
-        (this.length * 4) * this.height -
+        ((this.length * 4) * this.height) -
         (this.windowArea + this.doorArea)
       );
     },
@@ -69,7 +69,7 @@ export default {
       return Math.round((this.area / 200) * 100) / 100;
     },
     ceilingArea() {
-      return this.length * 4;
+      return this.length * this.length;
     },
     oneCoatCeiling() {
       return Math.round((this.ceilingArea / 350) * 100) / 100;
