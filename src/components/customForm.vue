@@ -9,8 +9,8 @@
         :key="index"
       >
         <label>Wall {{ index + 1 }}</label>
-        <input v-model="wall.width" type="number" placeholder="Width" />
-        <button @click.prevent="removeWall(index)" class="removeWallBtn" v-if="index >= 1">&#10006;</button>
+        <input v-model="wall.width" type="number" placeholder="Width" class="wallInput"/>
+        <button @click.prevent="removeWall(index)" class="removeWallBtn">&#10006;</button>
       </div>
 
       <div class="inputContainer height">
@@ -144,6 +144,14 @@ export default {
   gap: 2rem;
   margin: 1rem;
 }
+.wallInput{
+  position: relative;
+  left: 1rem;
+}
+.wallInput:first-child{
+  position: relative;
+  right: 1rem;
+}
 .addWallBtn {
   padding: 1rem;
   font-weight: 700;
@@ -156,6 +164,12 @@ export default {
   border: none;
   border-radius: 0.5rem;
 }
+.addWallBtn:active,
+.addWallBtn:hover {
+  background-color: rgba(29, 94, 94, 0.25);
+  color: #000;
+  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+}
 .removeWallBtn {
   color: red;
   background-color: #fff;
@@ -165,8 +179,15 @@ export default {
   font-weight: 900;
   transition: transform 150ms;
   margin-left: 0.5rem;
+  position: relative;
+  right: 10%;
 }
 .removeWallBtn:hover {
   transform: scale(135%);
+}
+@media only screen and (max-width: 550px) {
+  .removeWallBtn {
+    right: 5%;
+  }
 }
 </style>

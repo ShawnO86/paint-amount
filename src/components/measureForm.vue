@@ -20,9 +20,9 @@
         <div class="roomData">
           <p v-if="room.windows">Windows: {{ room.windows }}</p>
           <p v-if="room.doors">Doors: {{ room.doors }}</p>
-          <p>Paintable Area: {{ room.area }}sq. feet</p>
-          <p>One coat (walls): {{ room.one_coat }} gallon(s).</p>
-          <p>Two coats (walls): {{ room.two_coats }} gallon(s).</p>
+          <p>Paintable Area: <br>{{ room.area }}sq. feet</p>
+          <p>One coat (walls): <br>{{ room.one_coat }} gallon(s).</p>
+          <p>Two coats (walls): <br>{{ room.two_coats }} gallon(s).</p>
         </div>
       </div>
     </div>
@@ -115,21 +115,19 @@ export default {
 }
 .roomList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-auto-columns: 15rem;
-  gap: 2rem;
-  margin: 3rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  margin: 0;
 }
 .roomCard {
   color: #333;
   font-weight: 500;
-  border-radius: 1rem;
   background-color: white;
   border-radius: 0.5rem;
   padding: 1rem 1rem 0 1rem;
   box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
-  max-width: 20rem;
   justify-self: center;
+  width: 80%;
 }
 .roomId {
   position: relative;
@@ -147,18 +145,25 @@ export default {
   color: red;
   border: none;
   border-radius: 1rem;
-  left: 90%;
+  left: 94%;
+  bottom: 1rem;
   cursor: pointer;
   font-weight: 900;
-  transition: transform 150ms;
   z-index: 2;
+  background-color: #fff;
 }
 .delBtn:hover {
-  transform: scale(135%);
+  background-color: red;
+  color: #fff;
 }
-@media only screen and (max-width: 450px) {
-  .roomList {
-    margin: 1rem 0.25rem;
-  }
+@media only screen and (max-width: 550px) {
+ .inputContainer {
+  width: 100%;
+  text-align: center;
+ }
+ .inputContainer input{
+  width: 80%;
+
+ }
 }
 </style>

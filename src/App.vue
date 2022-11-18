@@ -48,7 +48,7 @@ h3 {
     margin: 0;
   }
   #appContainer {
-    padding: 0;
+    padding: 0.5rem;
     border: 2px solid var(--main-bg-color);
   }
   h2,

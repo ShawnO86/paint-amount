@@ -59,9 +59,12 @@ export default {
 #shapeContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: 2rem 0 0 0;
+  justify-content: space-around;
+  margin: 0;
   row-gap: 1rem;
+}
+.roomShapeContainer {
+  width: 25%;
 }
 .roomShapeContainer input[type="radio"] {
   appearance: none;
@@ -75,6 +78,8 @@ export default {
   border-radius: 0.5rem;
   padding: 1rem 2rem;
   box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  width: 100%;
+  text-align: center;
 }
 .roomShapeContainer input:checked {
   background-color: rgba(29, 94, 94, 0.25);
@@ -85,20 +90,18 @@ export default {
   content: attr(label);
   text-align: center;
 }
-#shapeContainer label {
-  padding: 1rem 0.5rem 0 1rem;
-}
 .mainContainer {
-  margin: 2rem 1rem;
+  margin: 2rem 0.5rem;
 }
-@media only screen and (max-width: 470px) {
-  .mainContainer {
-    margin: 1rem 0.5rem;
-  }
+@media only screen and (max-width: 550px) {
   #shapeContainer {
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
   }
+  .roomShapeContainer {
+  width: 100%;
+}
 }
 </style>
   
