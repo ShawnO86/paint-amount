@@ -71,6 +71,26 @@ export default {
       doors: "",
     };
   },
+  computed: {
+    area() {
+        let total = this.walls.reduce((acc, val) => acc + val.width * this.height, 0)
+      return (
+        total - (this.windowArea + this.doorArea)
+      );
+    },
+    oneCoat() {
+      return Math.round((this.area / 350) * 100) / 100;
+    },
+    twoCoats() {
+      return Math.round((this.area / 200) * 100) / 100;
+    },
+    windowArea() {
+      return this.windows * 15;
+    },
+    doorArea() {
+      return this.doors * 20;
+    },
+  },
   methods: {
     addWall() {
       this.walls.push({
@@ -83,24 +103,34 @@ export default {
     submitRoom(e) {
       e.preventDefault();
 
-      if (!this.walls) {
-        alert("Input measurements first.");
+      if (!this.height) {
+        alert("Input height first.");
       } else {
         const newRoom = {
           id: Math.floor(Math.random() * 10000),
           area: this.area,
           one_coat: this.oneCoat,
           two_coats: this.twoCoats,
-          ceiling_area: this.ceilingArea,
-          one_ceiling: this.oneCoatCeiling,
-          two_ceiling: this.twoCoatCeiling,
           windows: this.windows,
           doors: this.doors,
           shape: "Custom",
         };
         this.$emit("addRoom", newRoom);
 
-        (this.walls = []), (this.height = ""), (this.windows = "");
+        (this.walls = [{
+          width: "",
+        },
+        {
+          width: "",
+        },
+        {
+          width: "",
+        },
+        {
+          width: "",
+        },]), 
+        (this.height = ""), 
+        (this.windows = "");
         this.doors = "";
       }
     },

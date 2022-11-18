@@ -68,15 +68,6 @@ export default {
     twoCoats() {
       return Math.round((this.area / 200) * 100) / 100;
     },
-    ceilingArea() {
-      return this.length * this.length;
-    },
-    oneCoatCeiling() {
-      return Math.round((this.ceilingArea / 350) * 100) / 100;
-    },
-    twoCoatCeiling() {
-      return Math.round((this.ceilingArea / 200) * 100) / 100;
-    },
     windowArea() {
       return this.windows * 15;
     },
@@ -96,9 +87,6 @@ export default {
           area: this.area,
           one_coat: this.oneCoat,
           two_coats: this.twoCoats,
-          ceiling_area: this.ceilingArea,
-          one_ceiling: this.oneCoatCeiling,
-          two_ceiling: this.twoCoatCeiling,
           windows: this.windows,
           doors: this.doors,
           shape: "Square",

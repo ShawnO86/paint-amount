@@ -23,9 +23,6 @@
           <p>Paintable Area: {{ room.area }}sq. feet</p>
           <p>One coat (walls): {{ room.one_coat }} gallon(s).</p>
           <p>Two coats (walls): {{ room.two_coats }} gallon(s).</p>
-          <p>Ceiling area: {{ room.ceiling_area }}sq. feet</p>
-          <p>One coat (ceiling): {{ room.one_ceiling }} gallon(s).</p>
-          <p>Two coats (ceiling): {{ room.two_ceiling }} gallon(s).</p>
         </div>
       </div>
     </div>
