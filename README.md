@@ -1,7 +1,9 @@
-<pre>
-paint-amount
+```
+## paint-amount
+
 This vuejs application takes in room measurements and outputs the amount of paint needed to paint the room. 
-</pre>
+```
+
 ## Project setup
 ```
 npm install
