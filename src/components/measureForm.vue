@@ -6,6 +6,9 @@
     <div v-if="roomShape == 'square'">
       <SquareForm @addRoom="addRoom" />
     </div>
+    <div v-if="roomShape == 'custom'">
+      <CustomForm @addRoom="addRoom" />
+    </div>
     <h3>Saved Rooms:</h3>
     <div class="roomList">
       <div v-for="room in rooms" :key="room.id" class="roomCard">
@@ -32,6 +35,7 @@
   <script>
 import RectangleForm from "@/components/rectangleForm.vue";
 import SquareForm from "@/components/squareForm.vue";
+import CustomForm from "@/components/customForm.vue";
 
 export default {
   name: "measurement-form",
@@ -40,7 +44,8 @@ export default {
   },
   components: {
     RectangleForm,
-    SquareForm
+    SquareForm,
+    CustomForm
   },
   data() {
     return {
