@@ -55,7 +55,6 @@
   <script>
 export default {
   name: "rectangle-form",
-  props: {},
   data() {
     return {
       length: "",

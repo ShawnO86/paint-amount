@@ -46,7 +46,6 @@
   <script>
 export default {
   name: "square-form",
-  props: {},
   data() {
     return {
       length: "",

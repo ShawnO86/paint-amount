@@ -49,7 +49,6 @@
 <script>
 export default {
   name: "custom-form",
-  props: {},
   data() {
     return {
       height: "",
