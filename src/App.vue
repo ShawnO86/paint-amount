@@ -3,6 +3,7 @@
     <h1>How much paint will you need?</h1>
     <RoomShape />
   </div>
+  <div id="paintBG"></div>
 </template>
 
 <script>
@@ -18,43 +19,51 @@ export default {
 
 <style>
 :root {
-  --main-bg-color: rgb(29, 94, 94);
+  --main-color: rgba(33, 33, 53, 0.75);
   --secondary-color: rgb(171, 75, 19);
 }
-#app {
-  max-width: 65rem;
-  margin: 1rem auto;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  z-index: -1;
+  background-image: url(./assets/blueRoller.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
 }
 #appContainer {
-  border: 3px solid var(--main-bg-color);
-  padding: 0 1rem;
-  background-color: #e9e9e9;
-  border-radius: 1rem;
-  color: #111;
-}
-h1 {
-  color: #111;
-  text-align: center;
-}
-h2,
-h3 {
-  color: #111;
-  border-bottom: 3px solid var(--secondary-color);
+  background-color: rgba(33, 33, 53, 0.3);
+  border: 1px dashed var(--secondary-color);
+  max-width: 40rem;
+  margin: 1rem auto;
   padding: 1rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-@media only screen and (max-width: 470px) {
-  #app {
-    margin: 0;
-  }
+#appContainer h1 {
+  text-align: center;
+  margin-bottom: 1.75rem;
+  font-size: 2rem;
+  color: white;
+}
+@media only screen and (max-width: 900px) {
   #appContainer {
     padding: 0.5rem;
-    border: 2px solid var(--main-bg-color);
-  }
-  h2,
-  h3 {
-    border-bottom: 2px solid var(--secondary-color);
-    padding: 0.5rem;
   }
 }
+@media only screen and (min-width: 2000px) {
+  #appContainer {
+  max-width: 60rem;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+body::before {
+  background-position: left;
+  width: 40%;
+}
+}
+
 </style>

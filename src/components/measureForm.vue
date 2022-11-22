@@ -11,18 +11,18 @@
     </div>
     <h3>Saved Rooms:</h3>
     <div class="roomList">
-      <div v-for="room in rooms" :key="room.id" class="roomCard">
+      <div v-for="room in rooms" :key="room.id" class="roomCard" @click="updateRoom">
         <button class="delBtn" @click="deleteRoom(room.id)">&#10006;</button>
         <p class="roomId">
-          Room id #: {{ room.id }}<br />
+          Room Name: {{ room.roomName }}<br />
           ({{ room.shape }})
         </p>
         <div class="roomData">
           <p v-if="room.windows">Windows: {{ room.windows }}</p>
           <p v-if="room.doors">Doors: {{ room.doors }}</p>
-          <p>Paintable Area: <br>{{ room.area }}sq. feet</p>
-          <p>One coat (walls): <br>{{ room.one_coat }} gallon(s).</p>
-          <p>Two coats (walls): <br>{{ room.two_coats }} gallon(s).</p>
+          <p>Paintable Area <br />{{ room.area }}sq. feet</p>
+          <p>One coat (walls) <br />{{ room.one_coat }} gallon(s).</p>
+          <p>Two coats (walls) <br />{{ room.two_coats }} gallon(s).</p>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
   components: {
     RectangleForm,
     SquareForm,
-    CustomForm
+    CustomForm,
   },
   data() {
     return {
@@ -81,89 +81,113 @@ export default {
 };
 </script>
 
-  <style>
-.formHolder {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-.formHolder label {
-  display: block;
-  font-weight: 700;
-}
-.formHolder input {
+  <style scoped>
+h3 {
+  font-size: 1rem;
+  color: white;
+  background: var(--main-color);
   padding: 0.5rem;
-  text-align: center;
-}
-.submitBtn {
-  padding: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 1.5rem auto 0 auto;
-  width: 100%;
-  background-color: rgb(29, 94, 94);
-  color: #fff;
-  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
-  border: none;
-  border-radius: 0.5rem;
-}
-.submitBtn:active,
-.submitBtn:hover {
-  background-color: rgba(29, 94, 94, 0.25);
-  color: #000;
-  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
 }
 .roomList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: 1rem;
-  margin: 0;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  justify-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem;
 }
 .roomCard {
-  color: #333;
+  width: 90%;
+  border-top: 5px solid var(--main-color);
+  border-radius: 0.75rem 0 0 0.75rem ;
+  padding: 0.25rem 0.5rem 0 0.5rem;
+  box-shadow: 2px 2px 3px rgba(51, 51, 51, 0.65);
+  background-color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
-  background-color: white;
-  border-radius: 0.5rem;
-  padding: 1rem 1rem 0 1rem;
-  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
-  justify-self: center;
-  width: 80%;
+}
+.roomCard:nth-child(2n){
+  border-radius: 0 0.75rem 0.75rem 0 ;
+  box-shadow: -2px 2px 3px rgba(51, 51, 51, 0.65);
+}
+.roomCard:hover {
+  transform: scale(105%);
+  background-color: rgba(255, 255, 255, 1);
 }
 .roomId {
-  position: relative;
-  bottom: 2rem;
   font-weight: 700;
-  border-bottom: 1px solid rgb(171, 75, 19);
-  padding-bottom: 1rem;
 }
+.roomId,
 .roomData {
   position: relative;
-  bottom: 1.5rem;
+  bottom: 5%;
+}
+.roomCard:nth-child(2n) .roomData {
+  text-align: right;
+}
+.roomCard:nth-child(2n) .roomId {
+  text-align: right;
 }
 .delBtn {
   position: relative;
+  left: 90%;
+  bottom: 1%;
   color: red;
+  background: none;
   border: none;
-  border-radius: 1rem;
-  left: 94%;
-  bottom: 1rem;
   cursor: pointer;
-  font-weight: 900;
   z-index: 2;
-  background-color: #fff;
+  font-weight: 600;
+}
+.roomCard:nth-child(2n) .delBtn {
+  left: 0%;
 }
 .delBtn:hover {
-  background-color: red;
-  color: #fff;
+  transform: scale(120%);
 }
-@media only screen and (max-width: 550px) {
- .inputContainer {
-  width: 100%;
-  text-align: center;
- }
- .inputContainer input{
-  width: 80%;
+@media only screen and (max-width: 330px) {
+  .roomList {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.25rem;
+  margin: 0.15rem;
+}
+}
+@media only screen and (max-width: 537px) { 
 
- }
+  .roomCard:nth-child(2n) .delBtn {
+  left: 90%;
 }
+.roomCard:nth-child(2n) .roomData {
+  text-align: left;
+}
+.roomCard:nth-child(2n) .roomId {
+  text-align: left;
+}
+.roomCard{ 
+  border-radius: 0.75rem;
+}
+.roomCard:nth-child(2n){
+  border-radius: 0.75rem;
+  box-shadow: 2px 2px 3px rgba(51, 51, 51, 0.65);
+}
+}
+@media only screen and (min-width: 2000px) {
+  .roomList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  justify-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+.delBtn {
+  left: 92%;
+  top: 2%;
+}
+.roomCard:nth-child(2n) .delBtn {
+  left: 2%;
+}
+.roomId,
+.roomData {
+padding: 0 1.5rem;
+}
+}
+
 </style>

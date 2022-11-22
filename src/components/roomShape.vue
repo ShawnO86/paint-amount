@@ -56,15 +56,23 @@ export default {
 };
 </script>
   <style scoped>
+h2 {
+  font-size: 1.25rem;
+  color: white;
+  background: var(--main-color);
+  padding: 0.5rem;
+}
 #shapeContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 0;
-  row-gap: 1rem;
+  justify-content: center;
+  margin: 0 0.5rem;
+  column-gap: 0.5rem;
 }
 .roomShapeContainer {
-  width: 25%;
+  flex: 1;
+  position: relative;
+  right: 0.3rem;
 }
 .roomShapeContainer input[type="radio"] {
   appearance: none;
@@ -73,35 +81,27 @@ export default {
   display: block;
   cursor: pointer;
   font-weight: 700;
-  background-color: rgb(29, 94, 94);
+  background-color: var(--main-color);
   color: #fff;
-  border-radius: 0.5rem;
   padding: 1rem 2rem;
   box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  border-radius: 0.5rem;
   width: 100%;
   text-align: center;
 }
 .roomShapeContainer input:checked {
-  background-color: rgba(29, 94, 94, 0.25);
-  color: #000;
   box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+  background-color: var(--secondary-color);
 }
 .roomShapeContainer input::before {
   content: attr(label);
   text-align: center;
 }
-.mainContainer {
-  margin: 2rem 0.5rem;
-}
-@media only screen and (max-width: 550px) {
+
+@media only screen and (max-width: 300px) {
   #shapeContainer {
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
   }
-  .roomShapeContainer {
-  width: 100%;
-}
 }
 </style>
   

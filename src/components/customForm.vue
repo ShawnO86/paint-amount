@@ -1,49 +1,57 @@
 <template>
+  <div>
+  <h2>Next, enter measurements:</h2>
   <form @submit="submitRoom">
-    <h2>Next, enter measurements:</h2>
-
     <div class="formHolder">
-      <div
-        class="inputContainer customForm"
-        v-for="(wall, index) in walls"
-        :key="index"
-      >
-        <label>Wall {{ index + 1 }}</label>
-        <input v-model="wall.width" type="number" placeholder="Width" class="wallInput"/>
-        <button @click.prevent="removeWall(index)" class="removeWallBtn">&#10006;</button>
-      </div>
+      <div class="walls">
+        <div class="inputContainer" v-for="(wall, index) in walls" :key="index">
+          <label>Wall {{ index + 1 }}</label>
+          <input v-model="wall.width" placeholder="Width" class="wallInput" />
+          <button @click.prevent="removeWall(index)" class="removeWallBtn">
+            &#10006;
+          </button>
+        </div>
 
-      <div class="inputContainer height">
-        <label for="customHeight">Wall Height</label>
-        <input
-          type="number"
-          placeholder="height"
-          v-model="height"
-          id="customHeight"
-        />
+        <button @click.prevent="addWall()" class="addWallBtn">New wall</button>
+      </div>
+      <div class="windowDoor">
+        <div class="inputContainer height">
+          <label for="customHeight">Wall Height</label>
+          <input
+            type="number"
+            placeholder="height"
+            v-model="height"
+            id="customHeight"
+          />
+        </div>
+
+        <div class="inputContainer">
+          <label for="windows">Windows (-15sq. ft.)</label>
+          <input
+            type="number"
+            placeholder="Windows"
+            id="windows"
+            v-model="windows"
+          />
+        </div>
+        <div class="inputContainer">
+          <label for="doors">Doors (-20sq. ft.)</label>
+          <input type="number" placeholder="Doors" id="doors" v-model="doors" />
+        </div>
+        <div class="inputContainer">
+          <label for="roomName">Room Name</label>
+          <input
+            type="text"
+            placeholder="Room Name"
+            id="roomName"
+            v-model="roomName"
+          />
+        </div>
+        <input type="submit" value="Save Room" class="submitBtn" />
       </div>
     </div>
-
-    <button @click.prevent="addWall()" class="addWallBtn">Add wall</button>
-    <h2>Then, subtract windows and doors from area (optional):</h2>
-    <div class="formHolder">
-      <div class="inputContainer">
-        <label for="windows">Windows (-15sq. ft.)</label>
-        <input
-          type="number"
-          placeholder="Windows"
-          id="windows"
-          v-model="windows"
-        />
-      </div>
-      <div class="inputContainer">
-        <label for="doors">Doors (-20sq. ft.)</label>
-        <input type="number" placeholder="Doors" id="doors" v-model="doors" />
-      </div>
-    </div>
-
-    <input type="submit" value="Save Room" class="submitBtn" />
   </form>
+</div>
 </template>
 
 <script>
@@ -68,14 +76,16 @@ export default {
       ],
       windows: "",
       doors: "",
+      roomName: "",
     };
   },
   computed: {
     area() {
-        let total = this.walls.reduce((acc, val) => acc + val.width * this.height, 0)
-      return (
-        total - (this.windowArea + this.doorArea)
+      let total = this.walls.reduce(
+        (acc, val) => acc + val.width * this.height,
+        0
       );
+      return total - (this.windowArea + this.doorArea);
     },
     oneCoat() {
       return Math.round((this.area / 350) * 100) / 100;
@@ -102,8 +112,10 @@ export default {
     submitRoom(e) {
       e.preventDefault();
 
-      if (!this.height) {
-        alert("Input height first.");
+      if (!this.height, !this.area) {
+        alert("Input measurements first.");
+      } else if(!this.roomName) {
+        alert("Input Room name!")
       } else {
         const newRoom = {
           id: Math.floor(Math.random() * 10000),
@@ -113,80 +125,106 @@ export default {
           windows: this.windows,
           doors: this.doors,
           shape: "Custom",
+          roomName: this.roomName,
         };
         this.$emit("addRoom", newRoom);
 
-        (this.walls = [{
-          width: "",
-        },
-        {
-          width: "",
-        },
-        {
-          width: "",
-        },
-        {
-          width: "",
-        },]), 
-        (this.height = ""), 
-        (this.windows = "");
+        (this.walls = [
+          {
+            width: "",
+          },
+          {
+            width: "",
+          },
+          {
+            width: "",
+          },
+          {
+            width: "",
+          },
+        ]),
+          (this.height = ""),
+          (this.windows = "");
         this.doors = "";
+        this.roomName = "";
       }
     },
   },
 };
 </script>
 
-<style>
-.btnHolder {
-  display: flex;
-  gap: 2rem;
-  margin: 1rem;
+<style scoped>
+label {
+  display: block;
+  font-weight: 500;
+  color: white;
 }
-.wallInput{
-  position: relative;
-  left: 1rem;
+input {
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
 }
-.wallInput:first-child{
-  position: relative;
-  right: 1rem;
-}
-.addWallBtn {
-  padding: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 1.5rem auto 0 auto;
-  width: 100%;
-  background-color: rgb(29, 94, 94);
-  color: #fff;
-  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
-  border: none;
-  border-radius: 0.5rem;
-}
-.addWallBtn:active,
-.addWallBtn:hover {
-  background-color: rgba(29, 94, 94, 0.25);
-  color: #000;
-  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+h2 {
+  font-size: 1.25rem;
+  color: white;
+  background: var(--main-color);
+  padding: 0.5rem;
 }
 .removeWallBtn {
   color: red;
-  background-color: #fff;
+  background: none;
   border: none;
-  border-radius: 1rem;
   cursor: pointer;
-  font-weight: 900;
-  transition: transform 150ms;
-  margin-left: 0.5rem;
-  position: relative;
-  right: 10%;
+  font-weight: 600;
 }
 .removeWallBtn:hover {
-  transform: scale(135%);
+  transform: scale(120%);
 }
-@media only screen and (max-width: 550px) {
-  .removeWallBtn {
-    right: 5%;
+.addWallBtn {
+  width: 89%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--main-color);
+  color: rgb(245, 245, 245);
+  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.addWallBtn:hover {
+  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+  background-color: var(--secondary-color);
+}
+.submitBtn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(  --main-color);
+  color: rgb(245, 245, 245);
+  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.submitBtn:hover {
+  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+  background-color: var(--secondary-color);
+}
+
+.formHolder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 0.5rem;
+  background-color: var(--main-color);
+  padding: 0.75rem;
+}
+@media only screen and (max-width: 441px) {
+  .formHolder {
+    justify-content: center;
+  }
+  .walls {
+    position: relative;
+    left: 0.75rem;
   }
 }
 </style>

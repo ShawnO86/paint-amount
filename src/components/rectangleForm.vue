@@ -3,6 +3,7 @@
     <form @submit="submitRoom">
       <h2>Next, enter measurements:</h2>
       <div class="formHolder">
+        <div>
         <div class="inputContainer">
           <label for="rectLength">Length</label>
           <input
@@ -22,7 +23,7 @@
           />
         </div>
         <div class="inputContainer">
-          <label for="rectHeight">Wall Height</label>
+          <label for="rectHeight">Height</label>
           <input
             type="number"
             placeholder="height"
@@ -30,9 +31,9 @@
             id="rectHeight"
           />
         </div>
-      </div>
-      <h2>Then, subtract windows and doors from area (optional):</h2>
-      <div class="formHolder">
+        </div>
+
+        <div class="windowDoor">
         <div class="inputContainer">
           <label for="windows">Windows (-15sq. ft.)</label>
           <input
@@ -45,9 +46,21 @@
         <div class="inputContainer">
           <label for="doors">Doors (-20sq. ft.)</label>
           <input type="number" placeholder="Doors" id="doors" v-model="doors" />
+        </div>      
+        <div class="inputContainer">
+          <label for="roomName">Room Name</label>
+          <input
+            type="text"
+            placeholder="Room Name"
+            id="roomName"
+            v-model="roomName"
+          />
         </div>
+        </div>
+  
+        <input type="submit" value="Save Room" class="submitBtn" />
       </div>
-      <input type="submit" value="Save Room" class="submitBtn" />
+
     </form>
   </div>
 </template>
@@ -62,6 +75,7 @@ export default {
       height: "",
       windows: "",
       doors: "",
+      roomName: ""
     };
   },
   computed: {
@@ -90,6 +104,8 @@ export default {
 
       if (!this.length || !this.width || !this.height) {
         alert("Input measurements first.");
+      } else if(!this.roomName) {
+        alert("Input Room name!")
       } else {
         const newRoom = {
           id: Math.floor(Math.random() * 10000),
@@ -99,6 +115,7 @@ export default {
           windows: this.windows,
           doors: this.doors,
           shape: "Rectangle",
+          roomName: this.roomName
         };
         this.$emit("addRoom", newRoom);
 
@@ -107,6 +124,7 @@ export default {
         this.height = "";
         this.windows = "";
         this.doors = "";
+        this.roomName = "";
       }
     },
   },
@@ -114,7 +132,42 @@ export default {
 </script>
 
   <style scoped>
-form {
-  width: 100%;
+label {
+  display: block;
+  font-weight: 500;
+  color: white;
+}
+input {
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  color: white;
+  background: var(--main-color);
+  padding: 0.5rem;
+}
+.formHolder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 0.5rem;
+  background-color: var(--main-color);
+  padding: 0.75rem;
+}
+.submitBtn {
+    width: 80%;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(  --main-color);
+  color: rgb(245, 245, 245);
+  box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.submitBtn:hover {
+  box-shadow: 1px 1px 2px rgba(51, 51, 51, 0.25);
+  background-color: var(--secondary-color);
 }
 </style>
