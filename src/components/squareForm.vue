@@ -89,7 +89,7 @@ export default {
     submitRoom(e) {
       e.preventDefault();
 
-      if (!this.length || !this.height) {
+      if (!this.width || !this.height) {
         alert("Input measurements first.");
       } else if(!this.roomName) {
         alert("Input Room name!")
