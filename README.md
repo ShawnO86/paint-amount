@@ -1,7 +1,7 @@
 ```
 ## paint-amount
 ```
-## This vuejs application takes in room measurements and sends the room information to a array of room objects which then gets stringified to localStorage JSON object.
+This vuejs application takes in room measurements and sends the room information to a array of room objects which then gets stringified to localStorage JSON object.
 The localStorage object is parsed to be displayed in the "saved rooms" section of the document. The user can delete rooms from the localStorage object from there. 
 
 ## Project setup
