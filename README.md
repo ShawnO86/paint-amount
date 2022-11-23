@@ -3,8 +3,6 @@
 
 ## This vuejs application takes in room measurements 
 and outputs the amount of paint needed to paint the room. 
-
-Still figuring out how to allow user to update room cards.
 ```
 
 ## Project setup
