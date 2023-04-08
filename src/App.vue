@@ -3,7 +3,6 @@
     <h1>How much paint will you need?</h1>
     <RoomShape />
   </div>
-  <div id="paintBG"></div>
 </template>
 
 <script>
@@ -22,18 +21,8 @@ export default {
   --main-color: rgba(33, 33, 53, 0.75);
   --secondary-color: rgb(171, 75, 19);
 }
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 50%;
-  z-index: -1;
-  background-image: url(./assets/blueRoller.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
+body {
+  background-image: url(./assets/brickwall.webp);
 }
 #appContainer {
   background-color: rgba(33, 33, 53, 0.3);
