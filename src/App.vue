@@ -49,10 +49,6 @@ body {
   margin: 2rem auto;
   padding: 2rem;
 }
-body::before {
-  background-position: left;
-  width: 40%;
-}
 }
 
 </style>
