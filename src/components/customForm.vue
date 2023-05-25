@@ -122,7 +122,6 @@ export default {
           two_coats: this.twoCoats,
           windows: this.windows,
           doors: this.doors,
-          shape: "Custom",
           roomName: this.roomName,
         };
         this.$emit("addRoom", newRoom);
