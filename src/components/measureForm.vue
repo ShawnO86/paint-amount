@@ -1,38 +1,33 @@
 <template>
   <div>
-    <div v-if="roomShape == 'rectangle'">
-      <RectangleForm @addRoom="addRoom" />
-    </div>
-    <div v-if="roomShape == 'square'">
-      <SquareForm @addRoom="addRoom" />
-    </div>
-    <div v-if="roomShape == 'custom'">
-      <CustomForm @addRoom="addRoom" />
-    </div>
+    <custom-form @addRoom="addRoom" />
     <h3>Saved Rooms:</h3>
     <div class="roomList">
-      <div v-for="room in rooms" :key="room.id" class="roomCard" @click="updateRoom">
+      <div
+        v-for="room in rooms"
+        :key="room.id"
+        class="roomCard"
+        @click="updateRoom"
+      >
         <button class="delBtn" @click="deleteRoom(room.id)">&#10006;</button>
-        <p class="roomId">
-          Room Name: {{ room.roomName }}<br />
-          ({{ room.shape }})
-        </p>
+        <p class="roomId">Room Name: {{ room.roomName }}<br /></p>
         <div class="roomData">
           <p v-if="room.windows">Windows: {{ room.windows }}</p>
           <p v-if="room.doors">Doors: {{ room.doors }}</p>
-          <p>Paintable Area <br />{{ room.area }}sq. feet</p>
-          <p>One coat (walls) <br />{{ room.one_coat }} gallon(s).</p>
-          <p>Two coats (walls) <br />{{ room.two_coats }} gallon(s).</p>
+          <p>Paintable Area: {{ room.area }}sq. feet</p>
+          <p>One coat: {{ room.one_coat }} gallon(s).</p>
+          <p>Two coats: {{ room.two_coats }} gallon(s).</p>
         </div>
       </div>
     </div>
+    <h3 v-if="totalOneCoat" class="center">
+      One coat total: {{ totalOneCoat }} || Two coat total: {{ totalTwoCoats }}
+    </h3>
   </div>
 </template>
   
   <script>
-import RectangleForm from "@/components/rectangleForm.vue";
-import SquareForm from "@/components/squareForm.vue";
-import CustomForm from "@/components/customForm.vue";
+import customForm from "@/components/customForm.vue";
 
 export default {
   name: "measurement-form",
@@ -40,10 +35,9 @@ export default {
     roomShape: String,
   },
   components: {
-    RectangleForm,
-    SquareForm,
-    CustomForm,
+    "custom-form": customForm,
   },
+
   data() {
     return {
       rooms: [],
@@ -62,7 +56,30 @@ export default {
       deep: true,
     },
   },
-  emits: ["addRoom"],
+  computed: {
+    totalOneCoat() {
+      let total;
+      if (this.rooms.length > 0) {
+        let newRoomArr = [this.rooms];
+       total = newRoomArr[0].reduce(
+        (acc, val) => acc + val.one_coat,
+        0
+      );
+      }
+      return total + " gallons";
+    },
+    totalTwoCoats() {
+      let total;
+      if (this.rooms.length > 0) {
+        let newRoomArr = [this.rooms];
+       total = newRoomArr[0].reduce(
+        (acc, val) => acc + val.two_coats,
+        0
+      );
+      }
+      return total + " gallons";
+    },
+  },
   methods: {
     addRoom(roomObj) {
       if (localStorage.rooms) {
@@ -96,21 +113,12 @@ h3 {
   margin: 0.5rem;
 }
 .roomCard {
-  width: 90%;
+  min-width: 70%;
   border-top: 5px solid var(--main-color);
-  border-radius: 0.75rem 0 0 0.75rem ;
+  border-radius: 0.75rem;
   padding: 0.25rem 0.5rem 0 0.5rem;
-  box-shadow: 2px 2px 3px rgba(51, 51, 51, 0.65);
   background-color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
-}
-.roomCard:nth-child(2n){
-  border-radius: 0 0.75rem 0.75rem 0 ;
-  box-shadow: -2px 2px 3px rgba(51, 51, 51, 0.65);
-}
-.roomCard:hover {
-  transform: scale(105%);
-  background-color: rgba(255, 255, 255, 1);
 }
 .roomId {
   font-weight: 700;
@@ -143,51 +151,45 @@ h3 {
 .delBtn:hover {
   transform: scale(120%);
 }
+.center {
+  text-align: center;
+}
 @media only screen and (max-width: 330px) {
   .roomList {
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 0.25rem;
-  margin: 0.15rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.25rem;
+    margin: 0.15rem;
+  }
 }
-}
-@media only screen and (max-width: 537px) { 
-
+@media only screen and (max-width: 537px) {
   .roomCard:nth-child(2n) .delBtn {
-  left: 90%;
-}
-.roomCard:nth-child(2n) .roomData {
-  text-align: left;
-}
-.roomCard:nth-child(2n) .roomId {
-  text-align: left;
-}
-.roomCard{ 
-  border-radius: 0.75rem;
-}
-.roomCard:nth-child(2n){
-  border-radius: 0.75rem;
-  box-shadow: 2px 2px 3px rgba(51, 51, 51, 0.65);
-}
+    left: 90%;
+  }
+  .roomCard:nth-child(2n) .roomData {
+    text-align: left;
+  }
+  .roomCard:nth-child(2n) .roomId {
+    text-align: left;
+  }
 }
 @media only screen and (min-width: 2000px) {
   .roomList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  justify-items: center;
-  gap: 1rem;
-  margin: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    justify-items: center;
+    gap: 1rem;
+    margin: 1rem;
+  }
+  .delBtn {
+    left: 92%;
+    top: 2%;
+  }
+  .roomCard:nth-child(2n) .delBtn {
+    left: 2%;
+  }
+  .roomId,
+  .roomData {
+    padding: 0 1.5rem;
+  }
 }
-.delBtn {
-  left: 92%;
-  top: 2%;
-}
-.roomCard:nth-child(2n) .delBtn {
-  left: 2%;
-}
-.roomId,
-.roomData {
-padding: 0 1.5rem;
-}
-}
-
 </style>

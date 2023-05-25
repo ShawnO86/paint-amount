@@ -1,7 +1,6 @@
 <template>
-  <div>
-  <h2>Next, enter measurements:</h2>
-  <form @submit="submitRoom">
+  <h2>Enter your measurements:</h2>
+  <form @submit.prevent="submitRoom">
     <div class="formHolder">
       <div class="walls">
         <div class="inputContainer" v-for="(wall, index) in walls" :key="index">
@@ -11,7 +10,6 @@
             &#10006;
           </button>
         </div>
-
         <button @click.prevent="addWall()" class="addWallBtn">New wall</button>
       </div>
       <div class="windowDoor">
@@ -51,12 +49,12 @@
       </div>
     </div>
   </form>
-</div>
 </template>
 
 <script>
 export default {
   name: "custom-form",
+  emits: ["addRoom"],
   data() {
     return {
       height: "",
@@ -112,10 +110,10 @@ export default {
     submitRoom(e) {
       e.preventDefault();
 
-      if (!this.height, !this.area) {
+      if ((!this.height, !this.area)) {
         alert("Input measurements first.");
-      } else if(!this.roomName) {
-        alert("Input Room name!")
+      } else if (!this.roomName) {
+        alert("Input Room name!");
       } else {
         const newRoom = {
           id: Math.floor(Math.random() * 10000),
@@ -198,7 +196,7 @@ h2 {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.5rem;
-  background-color: var(  --main-color);
+  background-color: var(--main-color);
   color: rgb(245, 245, 245);
   box-shadow: 2px 2px 5px rgba(51, 51, 51, 0.5);
   border: none;

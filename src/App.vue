@@ -1,17 +1,17 @@
 <template>
-  <div id="appContainer">
+  <section>
     <h1>How much paint will you need?</h1>
-    <RoomShape />
-  </div>
+    <measurement-form />
+  </section>
 </template>
 
 <script>
-import RoomShape from "@/components/roomShape.vue";
+import measurementForm from "@/components/measureForm.vue";
 
 export default {
   name: "App",
   components: {
-    RoomShape,
+    "measurement-form": measurementForm,
   },
 };
 </script>
@@ -24,7 +24,7 @@ export default {
 body {
   background-image: url(./assets/brickwall.webp);
 }
-#appContainer {
+#app {
   background-color: rgba(33, 33, 53, 0.3);
   border: 1px dashed var(--secondary-color);
   max-width: 40rem;
@@ -32,23 +32,22 @@ body {
   padding: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-#appContainer h1 {
+#app h1 {
   text-align: center;
   margin-bottom: 1.75rem;
   font-size: 2rem;
   color: white;
 }
 @media only screen and (max-width: 900px) {
-  #appContainer {
+  #app {
     padding: 0.5rem;
   }
 }
 @media only screen and (min-width: 2000px) {
-  #appContainer {
-  max-width: 60rem;
-  margin: 2rem auto;
-  padding: 2rem;
+  #app {
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
 }
-}
-
 </style>
