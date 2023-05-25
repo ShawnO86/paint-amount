@@ -20,8 +20,8 @@
         </div>
       </div>
     </div>
-    <h3 v-if="totalOneCoat" class="center">
-      One coat total: {{ totalOneCoat }} || Two coat total: {{ totalTwoCoats }}
+    <h3 v-if="totalOneCoat && totalTwoCoats" class="center">
+      One coat total: {{ totalOneCoat }} gallons || Two coat total: {{ totalTwoCoats }} gallons
     </h3>
   </div>
 </template>
@@ -66,7 +66,7 @@ export default {
         0
       );
       }
-      return total + " gallons";
+      return total;
     },
     totalTwoCoats() {
       let total;
@@ -77,7 +77,7 @@ export default {
         0
       );
       }
-      return total + " gallons";
+      return total;
     },
   },
   methods: {
